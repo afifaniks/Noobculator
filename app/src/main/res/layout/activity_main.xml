@@ -12,8 +12,10 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="45sp"
         android:id="@+id/prev"
+        android:ellipsize="start"
+        android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:background="@color/colorPrimary"/>
@@ -29,7 +31,7 @@
         android:textColor="#fff"
         android:textAlignment="textEnd"
         android:layout_width="match_parent"
-        android:layout_height="150sp"
+        android:layout_height="165sp"
         android:layout_gravity="bottom|end"
         />
 
