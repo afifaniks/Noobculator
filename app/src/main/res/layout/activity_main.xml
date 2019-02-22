@@ -14,14 +14,14 @@
         android:text="0"
         android:autoSizeTextType="uniform"
         android:id="@+id/display"
-        android:background="@color/white"
-        android:textSize="80sp"
-        android:textColor="#000"
+        android:background="@color/colorPrimary"
+        android:textSize="70sp"
+        android:textColor="#fff"
         android:textAlignment="textEnd"
         android:layout_width="match_parent"
-        android:layout_height="180sp"
+        android:layout_height="200sp"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="20sp"/>
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

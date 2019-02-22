@@ -71,6 +71,12 @@ public class ExpressionEvaluation {
     }
 
     public static Double expressionEvaluation(String expression) {
+
+        //Clearing previous data
+        expressionToken.clear();
+        operand.clear();
+        operator.clear();
+
         char[] expressionArr = expression.toCharArray();
         String oper = "";
 
@@ -128,10 +134,6 @@ public class ExpressionEvaluation {
         }
 
         Double result = Double.valueOf(operand.peek());
-
-        expressionToken.clear();
-        operand.clear();
-        operator.clear();
 
         return result;
 
