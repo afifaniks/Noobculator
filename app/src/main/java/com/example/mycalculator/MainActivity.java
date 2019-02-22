@@ -70,18 +70,22 @@ public class MainActivity extends AppCompatActivity {
     public void operatorClick(View view) {
         TextView display = findViewById(R.id.display);
         Button btn = findViewById(view.getId());
+        String displayText = display.getText().toString();
 
         if (resultShown)
             resultShown = false;
 
-        display.setText(display.getText() + btn.getText().toString());
+        if (displayText.equals("Error") || displayText.equals("Infinity"))
+            display.setText("0" + btn.getText());
+        else
+            display.setText(displayText + btn.getText());
     }
 
     public void clear(View view) {
         TextView display = findViewById(R.id.display);
         String displayData = display.getText().toString();
 
-        if (displayData.equals("0") || displayData.equals("Syntax Error"))
+        if (displayData.equals("0") || displayData.equals("Error") || displayData.equals("Infinity"))
             display.setText("0");
         else {
             String backSpacedData = displayData.substring(0, displayData.length() - 1);
@@ -100,9 +104,15 @@ public class MainActivity extends AppCompatActivity {
         Double result = ExpressionEvaluation.expressionEvaluation(equation);
 
         if (Double.isNaN(result)) {
-            display.setText("Syntax Error");
+            display.setText("Error");
         } else {
-            display.setText(result.toString());
+            if (result == Math.round(result))
+            {
+                Integer res = (int)Math.round(result);
+                display.setText(res.toString());;
+            } else
+                display.setText(result.toString());
+
         }
 
         resultShown = true;

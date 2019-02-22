@@ -77,81 +77,90 @@ public class ExpressionEvaluation {
         operand.clear();
         operator.clear();
 
+        if (expression.charAt(0) == '-') {
+            expression = "0" + expression;
+        }
+
         char[] expressionArr = expression.toCharArray();
         String oper = "";
 
         // Validating expression
         boolean flag = false;
 
-        for (char i: expressionArr) {
-            int tester = isOperator(i);
-            if (tester != -1 && flag == true)
-                return Double.NaN;
-            else if (tester != -1)
-                flag = true;
-            else
-                flag = false;
-        }
+//        for (char i: expressionArr) {
+//            int tester = isOperator(i);
+//            if (tester != -1 && flag == true)
+//                return Double.NaN;
+//            else if (tester != -1)
+//                flag = true;
+//            else
+//                flag = false;
+//        }
+//
+//        if (flag)
+//            return Double.NaN;
 
-        if (flag)
-            return Double.NaN;
-
-        // Parsing expression into tokens
-        for (int i = 0; i < expressionArr.length; i++) {
-            if (isOperator(expressionArr[i]) != -1) {
-                expressionToken.add(oper);
-                oper = "";
-                expressionToken.add(String.valueOf(expressionArr[i]));
+        try {
+            // Parsing expression into tokens
+            for (int i = 0; i < expressionArr.length; i++) {
+                if (isOperator(expressionArr[i]) != -1) {
+                    expressionToken.add(oper);
+                    oper = "";
+                    expressionToken.add(String.valueOf(expressionArr[i]));
+                } else
+                    oper += expressionArr[i];
             }
-            else
-                oper += expressionArr[i];
-        }
 
-        expressionToken.add(oper);
 
-        // Infix evaluation for every token in the expressionToken list
-        for (String k: expressionToken) {
-            if (isOperator(k.charAt(0)) == -1) {
-                operand.push(k);
+            expressionToken.add(oper);
 
-            } else {
-                if (operator.isEmpty()) {
-                    operator.push(k.charAt(0));
+            // Infix evaluation for every token in the expressionToken list
+            for (String k : expressionToken) {
+                if (isOperator(k.charAt(0)) == -1) {
+                    operand.push(k);
+
                 } else {
-                    int precedenceOfStackTop = isOperator(operator.peek());
-                    int precedenceOfOperator = isOperator(k.charAt(0));
-
-                    if (precedenceOfStackTop < precedenceOfOperator) {
+                    if (operator.isEmpty()) {
                         operator.push(k.charAt(0));
                     } else {
-                        while ((!operator.isEmpty()) && (precedenceOfStackTop > precedenceOfOperator)) {
-                            double val1 = Double.valueOf(operand.pop());
-                            double val2 = Double.valueOf(operand.pop());
+                        int precedenceOfStackTop = isOperator(operator.peek());
+                        int precedenceOfOperator = isOperator(k.charAt(0));
 
-                            double res = calculate(val2, val1, operator.pop());
-                            operand.push(String.valueOf(res));
+                        if (precedenceOfStackTop < precedenceOfOperator) {
+                            operator.push(k.charAt(0));
+                        } else {
+                            while ((!operator.isEmpty()) && (precedenceOfStackTop > precedenceOfOperator)) {
+                                double val1 = Double.valueOf(operand.pop());
+                                double val2 = Double.valueOf(operand.pop());
 
-                            if (!operator.isEmpty())
-                                precedenceOfStackTop = isOperator(operator.peek());
+                                double res = calculate(val2, val1, operator.pop());
+                                operand.push(String.valueOf(res));
+
+                                if (!operator.isEmpty())
+                                    precedenceOfStackTop = isOperator(operator.peek());
+                            }
+
+                            operator.push(k.charAt(0));
                         }
-
-                        operator.push(k.charAt(0));
                     }
                 }
             }
+
+            while (!operator.empty()) {
+                double val1 = Double.valueOf(operand.pop());
+                double val2 = Double.valueOf(operand.pop());
+
+                double res = calculate(val2, val1, operator.pop());
+                operand.push(String.valueOf(res));
+            }
+
+            Double result = Double.valueOf(operand.peek());
+
+            return result;
+
+        } catch (Exception e) {
+            return Double.NaN;
         }
-
-        while (!operator.empty()) {
-            double val1 = Double.valueOf(operand.pop());
-            double val2 = Double.valueOf(operand.pop());
-
-            double res = calculate(val2, val1, operator.pop());
-            operand.push(String.valueOf(res));
-        }
-
-        Double result = Double.valueOf(operand.peek());
-
-        return result;
 
     }
 

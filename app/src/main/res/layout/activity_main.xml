@@ -15,6 +15,7 @@
         android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="30sp"
         android:autoSizeMaxTextSize="80sp"
+        android:textSize="80sp"
         android:id="@+id/display"
         android:background="@color/colorPrimary"
         android:textColor="#fff"
