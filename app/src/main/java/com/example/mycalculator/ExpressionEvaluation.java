@@ -80,6 +80,22 @@ public class ExpressionEvaluation {
         char[] expressionArr = expression.toCharArray();
         String oper = "";
 
+        // Validating expression
+        boolean flag = false;
+
+        for (char i: expressionArr) {
+            int tester = isOperator(i);
+            if (tester != -1 && flag == true)
+                return Double.NaN;
+            else if (tester != -1)
+                flag = true;
+            else
+                flag = false;
+        }
+
+        if (flag)
+            return Double.NaN;
+
         // Parsing expression into tokens
         for (int i = 0; i < expressionArr.length; i++) {
             if (isOperator(expressionArr[i]) != -1) {

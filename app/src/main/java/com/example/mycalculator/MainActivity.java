@@ -16,9 +16,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final TextView display = findViewById(R.id.display);
+        Button clear = findViewById(R.id.clear);
+
+        System.out.println(display);
+        clear.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                display.setText("0");
+                return true;
+            }
+        });
     }
 
     @Override
@@ -68,7 +79,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void clear(View view) {
         TextView display = findViewById(R.id.display);
-        display.setText("0");
+        String displayData = display.getText().toString();
+
+        if (displayData.equals("0") || displayData.equals("Syntax Error"))
+            display.setText("0");
+        else {
+            String backSpacedData = displayData.substring(0, displayData.length() - 1);
+
+            if (backSpacedData.equals(""))
+                backSpacedData = "0";
+
+            display.setText(backSpacedData);
+        }
     }
 
     public void calculate(View view) {
@@ -77,9 +99,13 @@ public class MainActivity extends AppCompatActivity {
         String equation = display.getText().toString();
         Double result = ExpressionEvaluation.expressionEvaluation(equation);
 
-        display.setText(result.toString());
-        resultShown = true;
+        if (Double.isNaN(result)) {
+            display.setText("Syntax Error");
+        } else {
+            display.setText(result.toString());
+        }
 
+        resultShown = true;
 
     }
 }
