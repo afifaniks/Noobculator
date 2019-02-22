@@ -20,13 +20,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final TextView display = findViewById(R.id.display);
+        final TextView history = findViewById(R.id.prev);
         Button clear = findViewById(R.id.clear);
 
-        System.out.println(display);
         clear.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 display.setText("0");
+                history.setText("");
                 return true;
             }
         });
@@ -99,17 +100,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void calculate(View view) {
         TextView display = findViewById(R.id.display);
+        TextView history = findViewById(R.id.prev);
 
-        String equation = display.getText().toString();
+        String equation = display.getText().toString().trim();
         Double result = ExpressionEvaluation.expressionEvaluation(equation);
 
         if (Double.isNaN(result)) {
             display.setText("Error");
         } else {
+            history.setText(equation);
             if (result == Math.round(result))
             {
-                Integer res = (int)Math.round(result);
-                display.setText(res.toString());;
+                String res = result.toString();
+                display.setText(res.substring(0, res.length() - 2));;
             } else
                 display.setText(result.toString());
 

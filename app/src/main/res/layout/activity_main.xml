@@ -11,17 +11,25 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:id="@+id/prev"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
         android:text="0"
         android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="30sp"
-        android:autoSizeMaxTextSize="80sp"
-        android:textSize="80sp"
+        android:autoSizeMaxTextSize="70sp"
+        android:textSize="70sp"
         android:id="@+id/display"
         android:background="@color/colorPrimary"
         android:textColor="#fff"
         android:textAlignment="textEnd"
         android:layout_width="match_parent"
-        android:layout_height="200sp"
+        android:layout_height="150sp"
         android:layout_gravity="bottom|end"
         />
 
