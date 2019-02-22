@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Noobculator</string>
+    <string name="author"><u>Author</u></string>
 </resources>

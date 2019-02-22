@@ -24,13 +24,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="version: 1.1"/>
+        android:text="Version: 1.1"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/author"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:text="Author: Afif Al Mamun"/>
+        android:text="Afif Al Mamun"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
