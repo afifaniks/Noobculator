@@ -84,22 +84,6 @@ public class ExpressionEvaluation {
         char[] expressionArr = expression.toCharArray();
         String oper = "";
 
-        // Validating expression
-        boolean flag = false;
-
-//        for (char i: expressionArr) {
-//            int tester = isOperator(i);
-//            if (tester != -1 && flag == true)
-//                return Double.NaN;
-//            else if (tester != -1)
-//                flag = true;
-//            else
-//                flag = false;
-//        }
-//
-//        if (flag)
-//            return Double.NaN;
-
         try {
             // Parsing expression into tokens
             for (int i = 0; i < expressionArr.length; i++) {
@@ -110,7 +94,6 @@ public class ExpressionEvaluation {
                 } else
                     oper += expressionArr[i];
             }
-
 
             expressionToken.add(oper);
 
@@ -129,7 +112,7 @@ public class ExpressionEvaluation {
                         if (precedenceOfStackTop < precedenceOfOperator) {
                             operator.push(k.charAt(0));
                         } else {
-                            while ((!operator.isEmpty()) && (precedenceOfStackTop > precedenceOfOperator)) {
+                            while ((!operator.isEmpty()) && (precedenceOfStackTop >= precedenceOfOperator)) {
                                 double val1 = Double.valueOf(operand.pop());
                                 double val2 = Double.valueOf(operand.pop());
 
@@ -149,13 +132,12 @@ public class ExpressionEvaluation {
             while (!operator.empty()) {
                 double val1 = Double.valueOf(operand.pop());
                 double val2 = Double.valueOf(operand.pop());
-
                 double res = calculate(val2, val1, operator.pop());
+
                 operand.push(String.valueOf(res));
             }
 
             Double result = Double.valueOf(operand.peek());
-
             return result;
 
         } catch (Exception e) {
