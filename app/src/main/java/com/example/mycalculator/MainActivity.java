@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -106,7 +108,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void calculate(View view) {
         TextView display = findViewById(R.id.display);
+        Animation textTransition = AnimationUtils.loadAnimation(this, R.anim.text_transition);
+
         TextView history = findViewById(R.id.prev);
+
+        history.startAnimation(textTransition);
 
         String equation = display.getText().toString().trim();
         Double result = ExpressionEvaluation.expressionEvaluation(equation);
@@ -115,7 +121,11 @@ public class MainActivity extends AppCompatActivity {
             display.setText("Syntax Error");
         } else {
             history.setText(equation);
-            if (result == Math.round(result))
+
+            if (String.valueOf(result).contains("E")) {
+                display.setText(result.toString());
+            }
+            else if (result == Math.round(result))
             {
                 String res = result.toString();
                 display.setText(res.substring(0, res.length() - 2));;

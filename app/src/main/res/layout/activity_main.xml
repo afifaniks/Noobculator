@@ -4,38 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
     android:background="@color/white"
     android:gravity="top|center"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:id="@+id/prev"
-        android:ellipsize="start"
-        android:padding="5sp"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:background="@color/colorPrimary"/>
-
-    <TextView
-        android:text="0"
-        android:padding="5sp"
-        android:textSize="80sp"
-        android:id="@+id/display"
-        app:autoSizeMinTextSize="30sp"
-        app:autoSizeMaxTextSize="80sp"
-        app:autoSizeTextType="uniform"
+    <LinearLayout
         android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:textAlignment="textEnd"
-        android:layout_gravity="center|end"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="120sp"
-        />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:id="@+id/prev"
+            android:ellipsize="start"
+            android:padding="5sp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:text="0"
+            android:padding="5sp"
+            android:textSize="80sp"
+            android:id="@+id/display"
+            app:autoSizeMinTextSize="30sp"
+            app:autoSizeMaxTextSize="80sp"
+            app:autoSizeTextType="uniform"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
+            android:textAlignment="textEnd"
+            android:layout_gravity="center|end"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
