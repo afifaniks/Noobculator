@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * @author: Afif Al Mamun
+ * @created_in: 2/20/19
+ * @project_name: MyCalculator
+ **/
+
 public class MainActivity extends AppCompatActivity {
 
     private static boolean resultShown = false;
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultShown)
             resultShown = false;
 
-        if (displayText.equals("Error") || displayText.equals("Infinity"))
+        if (displayText.equals("Syntax Error") || displayText.equals("Infinity"))
             display.setText("0" + btn.getText());
         else
             display.setText(displayText + btn.getText());
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         TextView display = findViewById(R.id.display);
         String displayData = display.getText().toString();
 
-        if (displayData.equals("0") || displayData.equals("Error") || displayData.equals("Infinity"))
+        if (displayData.equals("0") || displayData.equals("Syntax Error") || displayData.equals("Infinity"))
             display.setText("0");
         else {
             String backSpacedData = displayData.substring(0, displayData.length() - 1);
@@ -106,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         Double result = ExpressionEvaluation.expressionEvaluation(equation);
 
         if (Double.isNaN(result)) {
-            display.setText("Error");
+            display.setText("Syntax Error");
         } else {
             history.setText(equation);
             if (result == Math.round(result))
@@ -120,5 +126,21 @@ public class MainActivity extends AppCompatActivity {
 
         resultShown = true;
 
+    }
+
+    public void dotClick(View view) {
+        TextView display = findViewById(R.id.display);
+        String dataOnDisplay = display.getText().toString();
+        int len = dataOnDisplay.length();
+
+        if (resultShown) {
+            resultShown = false;
+            display.setText("0.");
+        } else {
+            if (dataOnDisplay.charAt(len - 1) >= '1' && dataOnDisplay.charAt(len - 1) <= '9')
+                display.setText(dataOnDisplay + ".");
+            else if (dataOnDisplay.charAt(len - 1) == '0')
+                display.setText(dataOnDisplay + ".");
+        }
     }
 }
