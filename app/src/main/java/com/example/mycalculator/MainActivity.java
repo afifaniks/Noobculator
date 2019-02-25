@@ -142,15 +142,22 @@ public class MainActivity extends AppCompatActivity {
         TextView display = findViewById(R.id.display);
         String dataOnDisplay = display.getText().toString();
         int len = dataOnDisplay.length();
+        char lastChar = dataOnDisplay.charAt(len - 1);
 
         if (resultShown) {
             resultShown = false;
             display.setText("0.");
         } else {
-            if (dataOnDisplay.charAt(len - 1) >= '1' && dataOnDisplay.charAt(len - 1) <= '9')
+            if ((lastChar >= '1'
+                    && lastChar <= '9')
+                    || lastChar == '0')
                 display.setText(dataOnDisplay + ".");
-            else if (dataOnDisplay.charAt(len - 1) == '0')
-                display.setText(dataOnDisplay + ".");
+            else if (lastChar == '+'
+                    || lastChar == '-'
+                    || lastChar == '\u00d7' // \u00d7 = multiplication character in unicode
+                    || lastChar == '\u00f7') // // \u00f7 = multiplication character in unicode
+                display.setText(dataOnDisplay + "0.");
+
         }
     }
 }
