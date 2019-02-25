@@ -5,7 +5,7 @@ import java.util.Stack;
 /**
  * @author: Afif Al Mamun
  * @created_in: 2/16/19
- * @project_name: LabWorks
+ * @project_name: MyCalculator
  **/
 public class ExpressionEvaluation {
     /**
