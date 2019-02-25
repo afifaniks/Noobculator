@@ -20,6 +20,12 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * resultShown is true when a result is shown
+     * after calculation and false otherwise.
+     * Uses: To differentiate between the status of the calculator
+     * whether it is a new calculation or not.
+     */
     private static boolean resultShown = false;
 
     @Override
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView history = findViewById(R.id.prev);
         Button clear = findViewById(R.id.clear);
 
+        // Setting functionality for clear button to clear
+        // both TextViews on holding this button.
         clear.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -41,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Generating ActionBar option menu.
+     * @param menu: default
+     * @return: default
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -48,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        // If about item is clicked showing developer abouts.
         if (item.getItemId() == R.id.about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
@@ -59,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Method to handle operand buttons like 1, 2, 3... clicks.
+     * @param view: default
+     */
     public void operandClick(View view) {
         Button btn = findViewById(view.getId());
         TextView display = findViewById(R.id.display);
@@ -66,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         String dataOnDisplay = display.getText().toString();
         String btnData = btn.getText().toString();
 
+        // If display data is 0 or a result is shown
+        // we set the display value to the value of the
+        // operand clicked otherwise we append operand with
+        // existing data
         if (dataOnDisplay.equals("0") || resultShown) {
             display.setText(btnData);
             resultShown = false;
@@ -76,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handles operators like +, -, *, / clicks.
+     * @param view: default
+     */
     public void operatorClick(View view) {
         TextView display = findViewById(R.id.display);
         Button btn = findViewById(view.getId());
@@ -90,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
             display.setText(displayText + btn.getText());
     }
 
+    /**
+     * Method is invoked when C button is pressed. We delete the last
+     * character inputted on a single press.
+     * For some special cases we set it back to 0.
+     * @param view: default
+     */
     public void clear(View view) {
         TextView display = findViewById(R.id.display);
         String displayData = display.getText().toString();
@@ -106,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method is called upon equal button is clicked.
+     * We calculate the value of the equation by calling ExpressionEvaluation class.
+     * if it returns NaN then an error has occured. Otherwise we show the result
+     * of calculation.
+     * @param view: default
+     */
     public void calculate(View view) {
         TextView display = findViewById(R.id.display);
         Animation textTransition = AnimationUtils.loadAnimation(this, R.anim.text_transition);
@@ -138,6 +177,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Handles decimal point button click.
+     * @param view: default
+     */
     public void dotClick(View view) {
         TextView display = findViewById(R.id.display);
         String dataOnDisplay = display.getText().toString();
